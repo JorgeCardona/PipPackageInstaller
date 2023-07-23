@@ -192,6 +192,8 @@ Este proyecto está licenciado bajo la Licencia MIT. Ver el archivo LICENSE para
 
 
 # BASE STRUCTURE OF A PROJECT TO PUBLISH
+# delete all folders that are not part of the project you created.
+# delete the next yaml code to avoid errors with generating the binaries
 ```yaml
 ⭐ package_to_publish [project_directory]
 ┗ 🌼 src [package]
