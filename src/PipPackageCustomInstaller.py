@@ -1,7 +1,7 @@
 import subprocess
 import requests
 
-class PipPackageCustomInstaller:
+class PipPackageInstaller:
     
     def __init__(self, package_name: str, version:int= None):
         
@@ -61,7 +61,7 @@ class PipPackageCustomInstaller:
         except subprocess.CalledProcessError:
             return "Package not found"
 
-    def install_package(self) -> str or None:
+    def install_package(self, environment='local') -> str or None:
             """
             Installs a package from PyPI if it exists and is not already installed locally.
 
@@ -102,7 +102,10 @@ class PipPackageCustomInstaller:
                 except ImportError:
                     return "pip is not installed. Please install pip to continue."
                 try:
-                    installation = pip.main(['install', '--user', package_to_install_locally])
+                    if environment =='virtualenv':
+                        installation = pip.main(['install', package_to_install_locally])
+                    else:
+                        installation = pip.main(['install', '--user', package_to_install_locally])
                     self.version = self.get_local_version_package()
                     return f"The package {package_to_install_locally} has been installed successfully."
                 except Exception as e:
